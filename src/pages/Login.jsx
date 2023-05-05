@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { userLocalStorage } from '../services/setupLocalStorage';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -20,6 +21,10 @@ function Login() {
     const { name, value } = target;
     if (name === 'email') setEmail(value);
     if (name === 'password') setPassword(value);
+  };
+
+  const handleClick = () => {
+    userLocalStorage(email);
   };
 
   return (
@@ -46,6 +51,7 @@ function Login() {
           type="button"
           data-testid="login-submit-btn"
           disabled={ isDisabled }
+          onClick={ handleClick }
         >
           ENTER
         </button>
