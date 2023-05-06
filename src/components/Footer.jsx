@@ -27,12 +27,12 @@ function Footer() {
       <button
         onClick={ () => history.push('/meals') }
       >
-        <img src={ mealIcon } alt="Meals Icon" data-testid="meals-bottom-btn"/>
+        <img src={ mealIcon } alt="Meals Icon" data-testid="meals-bottom-btn" />
       </button>
       <button
         onClick={ () => history.push('/drinks') }
       >
-        <img src={ drinkIcon } alt="Drinks Icon" data-testid="drinks-bottom-btn"/>
+        <img src={ drinkIcon } alt="Drinks Icon" data-testid="drinks-bottom-btn" />
       </button>
     </footer>
   ) : null;
