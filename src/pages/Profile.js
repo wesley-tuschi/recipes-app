@@ -1,25 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Profile() {
   const history = useHistory();
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.email) {
+      setUserEmail(user.email);
+    }
+  }, []);
+
+  const handleButtonClick = (path) => () => {
+    history.push(path);
+  };
 
   const handleClickLogout = () => {
     localStorage.clear();
     history.push('/');
   };
 
-  const { email } = JSON.parse(localStorage.getItem('user'));
-
   return (
     <section>
       <div>
-        <p data-testid="profile-email">{ email }</p>
+        <p data-testid="profile-email">{ userEmail }</p>
       </div>
 
       <button
         data-testid="profile-done-btn"
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ handleButtonClick('/done-recipes') }
       >
         Done Recipes
       </button>
