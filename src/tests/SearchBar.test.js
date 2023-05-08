@@ -11,6 +11,9 @@ const INPUT_PASSWORD = '12345678';
 const DATA_TEST_EMAIL = 'email-input';
 const DATA_TEST_PASSWORD = 'password-input';
 const DATA_TEST_BTN = 'login-submit-btn';
+const DATA_TEST_FIRST_LETTER = 'first-letter-search-radio';
+const INPUT_SEARCH = 'search-input';
+const DATA_TEST_BT_SEARCH = 'exec-search-btn';
 
 describe('search bar tests', () => {
   it('renders filter radio buttons and updates filter value', () => {
@@ -21,7 +24,7 @@ describe('search bar tests', () => {
     );
     const ingredientRadio = screen.getByTestId('ingredient-search-radio');
     const nameRadio = screen.getByTestId('name-search-radio');
-    const firstLetterRadio = screen.getByTestId('first-letter-search-radio');
+    const firstLetterRadio = screen.getByTestId('DATA_TEST_FIRST_LETTER');
 
     expect(ingredientRadio).toBeInTheDocument();
     expect(nameRadio).toBeInTheDocument();
@@ -48,7 +51,7 @@ describe('search bar tests', () => {
     );
 
     const nameRadio = screen.getByTestId('name-search-radio');
-    const btnSearch = screen.getByTestId('exec-search-btn');
+    const btnSearch = screen.getByTestId(DATA_TEST_BT_SEARCH);
 
     expect(nameRadio).toBeInTheDocument();
 
@@ -75,11 +78,11 @@ describe('search bar tests', () => {
     userEvent.click(btnEnter);
 
     const ingredientRadio = screen.getByTestId('ingredient-search-radio');
-    const btnSearch = screen.getByTestId('exec-search-btn');
+    const btnSearch = screen.getByTestId(DATA_TEST_BT_SEARCH);
     const iconSearch = screen.getByRole('img', { name: /search icon/i });
     userEvent.click(iconSearch);
 
-    const inputSearch = screen.getByTestId('search-input');
+    const inputSearch = screen.getByTestId(INPUT_SEARCH);
 
     userEvent.type(inputSearch, 'xablau');
     userEvent.click(ingredientRadio);
@@ -103,12 +106,12 @@ describe('search bar tests', () => {
     userEvent.type(inputPassword, INPUT_PASSWORD);
     userEvent.click(btnEnter);
 
-    const firstLetterRadio = screen.getByTestId('first-letter-search-radio');
-    const btnSearch = screen.getByTestId('exec-search-btn');
+    const firstLetterRadio = screen.getByTestId(DATA_TEST_FIRST_LETTER);
+    const btnSearch = screen.getByTestId(DATA_TEST_BT_SEARCH);
     const iconSearch = screen.getByRole('img', { name: /search icon/i });
     userEvent.click(iconSearch);
 
-    const inputSearch = screen.getByTestId('search-input');
+    const inputSearch = screen.getByTestId(INPUT_SEARCH);
 
     userEvent.type(inputSearch, 'xablau');
     userEvent.click(firstLetterRadio);
@@ -131,12 +134,12 @@ describe('search bar tests', () => {
     userEvent.type(inputPassword, INPUT_PASSWORD);
     userEvent.click(btnEnter);
 
-    const firstLetterRadio = screen.getByTestId('first-letter-search-radio');
-    const btnSearch = screen.getByTestId('exec-search-btn');
+    const firstLetterRadio = screen.getByTestId(DATA_TEST_FIRST_LETTER);
+    const btnSearch = screen.getByTestId(DATA_TEST_BT_SEARCH);
     const iconSearch = screen.getByRole('img', { name: /search icon/i });
     userEvent.click(iconSearch);
 
-    const inputSearch = screen.getByTestId('search-input');
+    const inputSearch = screen.getByTestId(INPUT_SEARCH);
 
     userEvent.type(inputSearch, 'a');
     userEvent.click(firstLetterRadio);
