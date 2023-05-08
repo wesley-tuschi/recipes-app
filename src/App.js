@@ -3,8 +3,6 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
-import Footer from './components/Footer';
-import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -14,7 +12,6 @@ function App() {
         <Route exact path="/recipes" component={ Recipes } />
         <Route exact path="/profile" component={ Profile } />
       </Switch>
-      <Footer />
     </div>
   );
 }
