@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/recipes" component={ Recipes } />
+        <Route exact path="/profile" component={ Profile } />
       </Switch>
       <Footer />
 
