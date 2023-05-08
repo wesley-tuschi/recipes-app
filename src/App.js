@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Profile from './pages/Profile'
+import Profile from './pages/Profile';
 
 function App() {
   return (

@@ -9,7 +9,7 @@ function Profile() {
     history.push('/');
   };
 
-  const { email } = JSON.parse(localStorage.getItem('user'))
+  const { email } = JSON.parse(localStorage.getItem('user'));
 
   return (
     <section>
