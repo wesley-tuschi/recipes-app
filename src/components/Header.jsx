@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
+import AppContext from '../context/AppContext';
 
 function Header() {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const location = useLocation();
   const history = useHistory();
+  const { inputSearch, setInputSearch } = useContext(AppContext);
 
   const displaySearchIcon = () => {
     const pagesWithSearch = ['/meals', '/drinks'];
@@ -64,8 +67,15 @@ function Header() {
         />
       </button>
       {displaySearchIcon()}
-      {isSearchVisible && <input type="text" data-testid="search-input" />}
+      {isSearchVisible && (
+        <input
+          type="text"
+          data-testid="search-input"
+          value={ inputSearch }
+          onChange={ ({ target }) => setInputSearch(target.value) }
+        />)}
       {getPageTitle() && <h1 data-testid="page-title">{getPageTitle()}</h1>}
+      <SearchBar />
     </header>
   ) : null;
 }
