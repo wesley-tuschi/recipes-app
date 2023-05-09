@@ -2,9 +2,7 @@ import React, { useCallback, useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import { fetchAPI } from '../services/fetchAPI';
-// import RecipesCard from './RecipesCard';
-
-const MAGIC_NUMBER = 12;
+import RecipesCard from './RecipesCard';
 
 function SearchBar() {
   const [filter, setFilter] = useState('');
@@ -45,7 +43,6 @@ function SearchBar() {
     }
     setFoodsFilterAPI(data);
   }, [filter, inputSearch, setFoodsFilterAPI, history, api, page]);
-  const foods = foodsFilterAPI?.slice(0, MAGIC_NUMBER);
 
   return (
     <div>
@@ -78,16 +75,7 @@ function SearchBar() {
         Search
 
       </button>
-      {foods?.map((food, index) => (
-        <div data-testid={ `${index}-recipe-card` } key={ index }>
-          <img
-            src={ food.strDrinkThumb || food.strMealThumb }
-            data-testid={ `${index}-card-img` }
-            alt=""
-          />
-          <p data-testid={ `${index}-card-name` }>{food.strDrink || food.strMeal}</p>
-        </div>
-      ))}
+      <RecipesCard foodsFilterAPI={ foodsFilterAPI } />
     </div>
   );
 }

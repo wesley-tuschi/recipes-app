@@ -13,6 +13,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={ Login } />
+        <Route exact path="/meals" component={ Recipes } />
+        <Route exact path="/drinks" component={ Recipes } />
         <Route exact path="/recipes" component={ Recipes } />
         <Route exact path="/profile" component={ Profile } />
       </Switch>
