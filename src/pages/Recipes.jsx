@@ -113,6 +113,7 @@ function Recipes() {
         );
       })}
       <Footer />
+
     </div>
   );
 }
