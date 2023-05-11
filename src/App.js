@@ -3,9 +3,9 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
+import Profile from './pages/Profile';
 import RecipeInProgress from './components/RecipeInProgress';
 import RecipesDetails from './pages/RecipeDetails';
-
 
 function App() {
   return (
