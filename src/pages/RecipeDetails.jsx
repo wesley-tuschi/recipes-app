@@ -64,6 +64,26 @@ function RecipesDetails() {
     setCopy('Link copied!');
   };
 
+  const saveFavorite = () => {
+    const favorite = {
+      id: params.id,
+      type: (verifyType ? 'meal' : 'drink'),
+      nationality: (verifyType ? recipe.strArea : ''),
+      category: recipe.strCategory,
+      alcoholicOrNot: (location.pathname.includes('drinks') ? recipe.strAlcoholic : ''),
+      name: (verifyType ? recipe.strMeal : recipe.strDrink),
+      image: (verifyType ? recipe.strMealThumb : recipe.strDrinkThumb),
+    };
+
+    if (localStorage.favoriteRecipes) {
+      const favoriteArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const favoriteAtt = [...favoriteArray, favorite];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteAtt));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([favorite]));
+    }
+  };
+
   console.log(recipe);
 
   return (
@@ -84,7 +104,10 @@ function RecipesDetails() {
       </button>
       {copy && <p>{ copy }</p>}
 
-      <button data-testid="favorite-btn">
+      <button
+        onClick={ saveFavorite }
+        data-testid="favorite-btn"
+      >
         <img src={ whiteHeartIcon } alt=" favorite button" />
       </button>
 
