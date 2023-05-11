@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { fetchAPI } from '../services/fetchAPI';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SearchBar from '../components/SearchBar';
 
 const MAGIC_NUMBER = 12;
 
@@ -16,6 +17,18 @@ function Recipes() {
   const api = mealPage
     ? 'https://www.themealdb.com/api/json/v1/1'
     : 'https://www.thecocktaildb.com/api/json/v1/1';
+  let title;
+
+  switch (location.pathname) {
+  case '/meals':
+    title = 'Meals';
+    break;
+  case '/drinks':
+    title = 'Drinks';
+    break;
+  default:
+    title = '';
+  }
 
   useEffect(() => {
     const fetchInitialRecipes = async () => {
@@ -58,7 +71,12 @@ function Recipes() {
 
   return (
     <div>
-      <Header />
+      <Header
+        showSearchIcon
+      >
+        {title}
+      </Header>
+      <SearchBar />
       <div>
         <button
           type="button"
