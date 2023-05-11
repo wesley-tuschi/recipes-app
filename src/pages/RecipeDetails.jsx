@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchAPI, fetchRecipes } from '../services/fetchAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 import './styles/RecipeDetails.css';
 
@@ -83,8 +84,11 @@ function RecipesDetails() {
       localStorage.setItem('favoriteRecipes', JSON.stringify([favorite]));
     }
   };
-
-  console.log(recipe);
+  const storageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const isFavorite = storageFavorite && (
+    storageFavorite.some((favorite) => favorite.id === params.id)
+  );
+  // console.log(isFavorite);
 
   return (
     <main className="main-details">
@@ -106,9 +110,12 @@ function RecipesDetails() {
 
       <button
         onClick={ saveFavorite }
-        data-testid="favorite-btn"
       >
-        <img src={ whiteHeartIcon } alt=" favorite button" />
+        { isFavorite ? (
+          <img data-testid="favorite-btn" src={ blackHeartIcon } alt=" favorite button" />
+        ) : (
+          <img data-testid="favorite-btn" src={ whiteHeartIcon } alt=" favorite button" />
+        )}
       </button>
 
       <br />
