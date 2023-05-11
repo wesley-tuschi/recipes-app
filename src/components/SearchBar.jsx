@@ -42,7 +42,12 @@ function SearchBar() {
       history.push(`${page}/${page.includes('meal') ? data[0].idMeal : data[0].idDrink}`);
     }
     setFoodsFilterAPI(data);
+
+  }, [filter, inputSearch, setFoodsFilterAPI, history, api, page, foodsFilterAPI]);
+  const foods = foodsFilterAPI?.slice(0, MAGIC_NUMBER);
+
   }, [filter, inputSearch, setFoodsFilterAPI, history, api, page]);
+
 
   return (
     <div>
