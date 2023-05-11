@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { fetchAPI } from '../services/fetchAPI';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const MAGIC_NUMBER = 12;
 
@@ -56,6 +58,7 @@ function Recipes() {
 
   return (
     <div>
+      <Header />
       <div>
         <button
           type="button"
@@ -91,6 +94,7 @@ function Recipes() {
           </Link>
         );
       })}
+      <Footer />
     </div>
   );
 }
