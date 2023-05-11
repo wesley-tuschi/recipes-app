@@ -15,6 +15,7 @@ function RecipesDetails() {
   const [recipe, setRecipe] = useState([]);
   const [recomendation, setRecomendation] = useState([]);
   const [copy, setCopy] = useState('');
+  const [isFavorite, setIsFavorite] = useState(false);
   const inha = location.pathname.includes('meals') ? 'Meal' : 'Drink';
   const inhaFetch = location.pathname.includes('meals') ? 'Drink' : 'Meal';
   const verifyType = location.pathname.includes('meals');
@@ -41,10 +42,15 @@ function RecipesDetails() {
       setRecomendation(data[`${inhaFetch.toLowerCase()}s`]);
     }
     fetchRecomendation();
+
+    const storageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const isFav = storageFavorite && (
+      storageFavorite.some((favorite) => favorite.id === params.id)
+    );
+    setIsFavorite(isFav);
   }, []);
 
-  const videoURL = recipe.strYoutube ? recipe.strYoutube : 'https://www.youtube.com/watch?v=0LwcvjNJTuM';
-  const videoId = videoURL.match(/v=([^&]+)/)[1];
+  const videoId = recipe.strYoutube && recipe.strYoutube.match(/v=([^&]+)/)[1];
 
   const verifyStorageDone = () => {
     const getStorage = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -78,17 +84,21 @@ function RecipesDetails() {
 
     if (localStorage.favoriteRecipes) {
       const favoriteArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const isSame = favoriteArray.some((item) => item.id === favorite.id);
       const favoriteAtt = [...favoriteArray, favorite];
       localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteAtt));
+      if (isSame) {
+        const updatedFavorites = favoriteArray.filter((item) => item.id !== favorite.id);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavorites));
+        setIsFavorite(false);
+      } else {
+        setIsFavorite(true);
+      }
     } else {
       localStorage.setItem('favoriteRecipes', JSON.stringify([favorite]));
+      setIsFavorite(true);
     }
   };
-  const storageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  const isFavorite = storageFavorite && (
-    storageFavorite.some((favorite) => favorite.id === params.id)
-  );
-  // console.log(isFavorite);
 
   return (
     <main className="main-details">
@@ -109,13 +119,13 @@ function RecipesDetails() {
       {copy && <p>{ copy }</p>}
 
       <button
-        onClick={ saveFavorite }
+        onClick={ () => saveFavorite() }
       >
-        { isFavorite ? (
-          <img data-testid="favorite-btn" src={ blackHeartIcon } alt=" favorite button" />
-        ) : (
-          <img data-testid="favorite-btn" src={ whiteHeartIcon } alt=" favorite button" />
-        )}
+        <img
+          data-testid="favorite-btn"
+          src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
+          alt=" favorite button"
+        />
       </button>
 
       <br />
@@ -157,7 +167,7 @@ function RecipesDetails() {
       </p>
 
       {
-        location.pathname.includes('meals') && (
+        verifyType && (
           <iframe
             title={ videoId }
             data-testid="video"
