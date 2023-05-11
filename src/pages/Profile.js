@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Profile() {
   const history = useHistory();
@@ -23,6 +25,7 @@ function Profile() {
 
   return (
     <section>
+      <Header>Profile</Header>
       <div>
         <p data-testid="profile-email">{ userEmail }</p>
       </div>
@@ -47,6 +50,7 @@ function Profile() {
       >
         Logout
       </button>
+      <Footer />
     </section>
   );
 }
