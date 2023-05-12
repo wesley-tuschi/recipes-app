@@ -48,7 +48,7 @@ function RecipesDetails() {
       storageFavorite.some((favorite) => favorite.id === params.id)
     );
     setIsFavorite(isFav);
-  }, []);
+  }, [inhaFetch, location.pathname, params.id]);
 
   const videoId = recipe.strYoutube && recipe.strYoutube.match(/v=([^&]+)/)[1];
 

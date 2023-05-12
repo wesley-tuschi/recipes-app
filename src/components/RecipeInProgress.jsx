@@ -57,7 +57,7 @@ function RecipeInProgress() {
       storageFavorite.some((favorite) => favorite.id === recipeId.id)
     );
     setIsFavorite(isFav);
-  }, []);
+  }, [recipeId.id]);
 
   useEffect(() => {
     const checkAllIngredients = () => {
