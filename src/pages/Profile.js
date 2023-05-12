@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../components/Header';
+import profileIcon from '../images/profileIcon.svg';
 import Footer from '../components/Footer';
 
 function Profile() {
@@ -24,8 +24,15 @@ function Profile() {
   };
 
   return (
-    <section>
-      <Header>Profile</Header>
+    <header>
+      <button onClick={ () => history.push('/profile') }>
+        <img
+          src={ profileIcon }
+          alt="Profile Icon"
+          data-testid="profile-top-btn"
+        />
+      </button>
+      <h2 data-testid="page-title">Profile</h2>
       <div>
         <p data-testid="profile-email">{ userEmail }</p>
       </div>
@@ -51,7 +58,7 @@ function Profile() {
         Logout
       </button>
       <Footer />
-    </section>
+    </header>
   );
 }
 

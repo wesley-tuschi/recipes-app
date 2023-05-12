@@ -1,63 +1,81 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import AppContext from '../context/AppContext';
 
-function Header({ showSearchIcon = false, children }) {
-  const [isSearchBarVisible, setSearchBarVisible] = useState(false);
+function Header() {
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const location = useLocation();
   const history = useHistory();
+  const { inputSearch, setInputSearch } = useContext(AppContext);
 
-  const handleProfileClick = () => {
-    history.push('/profile');
-  };
+  const displaySearchIcon = () => {
+    const pagesWithSearch = ['/meals', '/drinks'];
 
-  const toggleSearchBar = () => {
-    setSearchBarVisible(!isSearchBarVisible);
-  };
-
-  return (
-    <header>
-      <button
-        type="button"
-        onClick={ handleProfileClick }
-      >
-        <img
-          src={ profileIcon }
-          alt="Profile"
-          data-testid="profile-top-btn"
-        />
-      </button>
-      {showSearchIcon && (
-        <button
-          type="button"
-          onClick={ toggleSearchBar }
-        >
+    if (pagesWithSearch.includes(location.pathname)) {
+      return (
+        <button onClick={ () => setIsSearchVisible(!isSearchVisible) }>
           <img
             src={ searchIcon }
-            alt="Search"
+            alt="Search Icon"
             data-testid="search-top-btn"
           />
         </button>
-      )}
-      {isSearchBarVisible && (
+      );
+    }
+    return null;
+  };
+
+  const getPageTitle = () => {
+    switch (location.pathname) {
+    case '/meals':
+      return 'Meals';
+    case '/drinks':
+      return 'Drinks';
+    case '/profile':
+      return 'Profile';
+    case '/done-recipes':
+      return 'Done Recipes';
+    case '/favorite-recipes':
+      return 'Favorite Recipes';
+    default:
+      return '';
+    }
+  };
+
+  const shouldDisplayHeader = () => {
+    const routesWithoutHeader = [
+      '/',
+      '/meals/:id-da-receita',
+      '/drinks/:id-da-receita',
+      '/meals/:id-da-receita/in-progress',
+      '/drinks/:id-da-receita/in-progress',
+    ];
+
+    return !routesWithoutHeader.some((path) => new RegExp(`^${path.replace(/:\w+-\w+/g, '\\d+')}$`).test(location.pathname));
+  };
+
+  return shouldDisplayHeader() ? (
+    <header>
+      <button onClick={ () => history.push('/profile') }>
+        <img
+          src={ profileIcon }
+          alt="Profile Icon"
+          data-testid="profile-top-btn"
+        />
+      </button>
+      {displaySearchIcon()}
+      {isSearchVisible && (
         <input
           type="text"
           data-testid="search-input"
-        />
-      )}
-      <h1
-        data-testid="page-title"
-      >
-        {children}
-      </h1>
+          value={ inputSearch }
+          onChange={ ({ target }) => setInputSearch(target.value) }
+        />)}
+      {getPageTitle() && <h1 data-testid="page-title">{getPageTitle()}</h1>}
     </header>
-  );
+  ) : null;
 }
-
-Header.propTypes = {
-  showSearchIcon: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-};
 
 export default Header;
