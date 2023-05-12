@@ -1,28 +1,13 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import './styles/Footer.css';
 
 function Footer() {
   const history = useHistory();
-  const location = useLocation();
 
-  const shouldDisplayFooter = () => {
-    const routesWithoutFooter = [
-      '/',
-      '/meals/:id-da-receita',
-      '/drinks/:id-da-receita',
-      '/meals/:id-da-receita/in-progress',
-      '/drinks/:id-da-receita/in-progress',
-      '/done-recipes',
-      '/favorite-recipes',
-    ];
-
-    return !routesWithoutFooter.some((path) => new RegExp(`^${path.replace(/:\w+-\w+/g, '\\d+')}$`).test(location.pathname));
-  };
-
-  return shouldDisplayFooter() ? (
+  return (
     <footer data-testid="footer" className="footer">
       <button
         onClick={ () => history.push('/meals') }
@@ -35,7 +20,7 @@ function Footer() {
         <img src={ drinkIcon } alt="Drinks Icon" data-testid="drinks-bottom-btn" />
       </button>
     </footer>
-  ) : null;
+  );
 }
 
 export default Footer;

@@ -39,10 +39,6 @@ function Recipes() {
     fetchCategories();
   }, [api]);
 
-  // useEffect(() => {
-  //   console.log(foodsFilterAPI);
-  // });
-
   const handleFilter = useCallback(
     async (category) => {
       if (category === currentCategory || category === 'All') {
