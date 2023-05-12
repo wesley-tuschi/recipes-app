@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
+import style from './styles/DoneRecipes.module.css';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -76,6 +77,8 @@ function DoneRecipes() {
               <Link to={ `/${recipe.type}s/${recipe.id}` }>
                 <img
                   src={ recipe.image }
+                  // style={ { width: '200px' } }
+                  className={ style.img }
                   alt="meal img"
                   data-testid={ `${index}-horizontal-image` }
                 />
