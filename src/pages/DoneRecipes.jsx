@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
-import Footer from '../components/Footer';
 
-function Profile() {
+function DoneRecipes() {
   const history = useHistory();
   const [userEmail, setUserEmail] = useState('');
 
@@ -32,7 +31,7 @@ function Profile() {
           data-testid="profile-top-btn"
         />
       </button>
-      <h2 data-testid="page-title">Profile</h2>
+      <h2 data-testid="page-title">Done Recipes</h2>
       <div>
         <p data-testid="profile-email">{ userEmail }</p>
       </div>
@@ -57,9 +56,8 @@ function Profile() {
       >
         Logout
       </button>
-      <Footer />
     </header>
   );
 }
 
-export default Profile;
+export default DoneRecipes;

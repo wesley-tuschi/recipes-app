@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import SearchBar from './SearchBar';
 import AppContext from '../context/AppContext';
 
 function Header() {
@@ -75,7 +74,6 @@ function Header() {
           onChange={ ({ target }) => setInputSearch(target.value) }
         />)}
       {getPageTitle() && <h1 data-testid="page-title">{getPageTitle()}</h1>}
-      <SearchBar />
     </header>
   ) : null;
 }

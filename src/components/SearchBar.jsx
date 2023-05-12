@@ -1,15 +1,15 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import { fetchAPI } from '../services/fetchAPI';
-import RecipesCard from './RecipesCard';
+// import RecipesCard from './RecipesCard';
 
 function SearchBar() {
   const [filter, setFilter] = useState('');
   const {
     inputSearch,
-    setFoodsFilterAPI,
-    foodsFilterAPI } = useContext(AppContext);
+    foodsFilterAPI,
+    setFoodsFilterAPI } = useContext(AppContext);
 
   const history = useHistory();
   const location = useLocation();
@@ -44,6 +44,10 @@ function SearchBar() {
     setFoodsFilterAPI(data);
   }, [filter, inputSearch, setFoodsFilterAPI, history, api, page]);
 
+  useEffect(() => {
+    console.log(foodsFilterAPI);
+  });
+
   return (
     <div>
       <input
@@ -75,7 +79,6 @@ function SearchBar() {
         Search
 
       </button>
-      <RecipesCard foodsFilterAPI={ foodsFilterAPI } />
     </div>
   );
 }

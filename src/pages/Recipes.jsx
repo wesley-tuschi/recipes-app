@@ -1,13 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import { fetchAPI } from '../services/fetchAPI';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-
-const MAGIC_NUMBER = 12;
+import SearchBar from '../components/SearchBar';
+import RecipesCard from '../components/RecipesCard';
+import AppContext from '../context/AppContext';
 
 function Recipes() {
-  const [foodsFilterAPI, setFoodsFilterAPI] = useState(null);
+  const [foodsAPI, setFoodsAPI] = useState(null);
+  const { foodsFilterAPI } = useContext(AppContext);
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState('');
   const location = useLocation();
@@ -21,7 +23,7 @@ function Recipes() {
     const fetchInitialRecipes = async () => {
       const endpoint = `${api}/search.php?s=`;
       const data = await fetchAPI(page, endpoint);
-      setFoodsFilterAPI(data);
+      setFoodsAPI(data);
     };
     fetchInitialRecipes();
   }, [api, page]);
@@ -37,29 +39,32 @@ function Recipes() {
     fetchCategories();
   }, [api]);
 
+  // useEffect(() => {
+  //   console.log(foodsFilterAPI);
+  // });
+
   const handleFilter = useCallback(
     async (category) => {
       if (category === currentCategory || category === 'All') {
         setCurrentCategory('');
         const endpoint = `${api}/search.php?s=`;
         const data = await fetchAPI(page, endpoint);
-        setFoodsFilterAPI(data);
+        setFoodsAPI(data);
       } else {
         setCurrentCategory(category);
         const endpoint = `${api}/filter.php?c=${category}`;
         const data = await fetchAPI(page, endpoint);
-        setFoodsFilterAPI(data);
+        setFoodsAPI(data);
       }
     },
     [api, currentCategory, page],
   );
 
-  const foods = foodsFilterAPI?.slice(0, MAGIC_NUMBER);
-
   return (
     <div>
 
       <Header />
+      <SearchBar />
       <div>
         <button
           type="button"
@@ -79,22 +84,9 @@ function Recipes() {
           </button>
         ))}
       </div>
-      {foods?.map((food, index) => {
-        const id = food.idMeal || food.idDrink;
-        const route = mealPage ? `/meals/${id}` : `/drinks/${id}`;
-        return (
-          <Link to={ route } key={ index } data-testid={ `${index}-recipe-card` }>
-            <div>
-              <img
-                src={ food.strDrinkThumb || food.strMealThumb }
-                data-testid={ `${index}-card-img` }
-                alt=""
-              />
-              <p data-testid={ `${index}-card-name` }>{food.strDrink || food.strMeal}</p>
-            </div>
-          </Link>
-        );
-      })}
+
+      <RecipesCard recipes={ foodsFilterAPI.length > 0 ? foodsFilterAPI : foodsAPI } />
+
       <Footer />
 
     </div>
