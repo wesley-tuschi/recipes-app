@@ -2,7 +2,12 @@ import React, { useContext, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import logo from '../images/logo.svg';
+import drinkIcon from '../images/drinkIcon.svg';
+import mealIcon from '../images/mealIcon.svg';
 import AppContext from '../context/AppContext';
+
+import '../pages/styles/Header.css';
 
 function Header() {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -44,6 +49,17 @@ function Header() {
     }
   };
 
+  const getPageIcon = () => {
+    switch (location.pathname) {
+    case '/meals':
+      return mealIcon;
+    case '/drinks':
+      return drinkIcon;
+    default:
+      return null;
+    }
+  };
+
   const shouldDisplayHeader = () => {
     const routesWithoutHeader = [
       '/',
@@ -57,23 +73,37 @@ function Header() {
   };
 
   return shouldDisplayHeader() ? (
-    <header>
-      <button onClick={ () => history.push('/profile') }>
+    <header className="header">
+      <div className="header-logo">
         <img
-          src={ profileIcon }
-          alt="Profile Icon"
-          data-testid="profile-top-btn"
+          src={ logo }
+          alt="logo Icon"
         />
-      </button>
-      {displaySearchIcon()}
-      {isSearchVisible && (
-        <input
-          type="text"
-          data-testid="search-input"
-          value={ inputSearch }
-          onChange={ ({ target }) => setInputSearch(target.value) }
-        />)}
-      {getPageTitle() && <h1 data-testid="page-title">{getPageTitle()}</h1>}
+      </div>
+      <div className="header-title">
+        {getPageTitle() && <h1 data-testid="page-title">{getPageTitle()}</h1>}
+        <img
+          src={ getPageIcon() }
+          alt="page Icon"
+        />
+      </div>
+      <div className="profile-search-icons">
+        <button onClick={ () => history.push('/profile') }>
+          <img
+            src={ profileIcon }
+            alt="Profile Icon"
+            data-testid="profile-top-btn"
+          />
+        </button>
+        {displaySearchIcon()}
+        {isSearchVisible && (
+          <input
+            type="text"
+            data-testid="search-input"
+            value={ inputSearch }
+            onChange={ ({ target }) => setInputSearch(target.value) }
+          />)}
+      </div>
     </header>
   ) : null;
 }

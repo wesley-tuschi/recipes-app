@@ -1,0 +1,31 @@
+.header {
+    background-color: #FCDC36;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    color: #41197F;
+  }
+  
+  .header .header-logo {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header .header-title {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+  }
+  
+  .header .profile-search-icons {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
