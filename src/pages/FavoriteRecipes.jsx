@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import style from './styles/FavoriteRecipes.module.css';
@@ -9,7 +8,6 @@ import style from './styles/FavoriteRecipes.module.css';
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [filter, setFilter] = useState('All');
-  const [isFavorite] = useState(true);
   const [copy, setCopy] = useState('');
   const history = useHistory();
 
@@ -117,7 +115,7 @@ function FavoriteRecipes() {
                 onClick={ () => removeFavorite(recipe.id) }
               >
                 <img
-                  src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
+                  src={ blackHeartIcon }
                   data-testid={ `${index}-horizontal-favorite-btn` }
                   alt=" favorite button"
                 />
@@ -164,7 +162,7 @@ function FavoriteRecipes() {
                   onClick={ () => removeFavorite(recipe.id) }
                 >
                   <img
-                    src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
+                    src={ blackHeartIcon }
                     data-testid={ `${index}-horizontal-favorite-btn` }
                     alt=" favorite button"
                   />

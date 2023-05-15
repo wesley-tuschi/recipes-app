@@ -1,3 +1,24 @@
+export const favoriteRecipesMock = [
+  {
+    id: '52893',
+    type: 'meal',
+    nationality: 'British',
+    category: 'Dessert',
+    alcoholicOrNot: '',
+    name: 'Apple & Blackberry Crumble',
+    image: 'https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg',
+  },
+  {
+    id: '17208',
+    type: 'drink',
+    nationality: '',
+    category: 'Ordinary Drink',
+    alcoholicOrNot: 'Alcoholic',
+    name: 'Rose',
+    image: 'https://www.thecocktaildb.com/images/media/drink/8kxbvq1504371462.jpg',
+  },
+];
+
 export const mockOne = [
   {
     idMeal: '52977',
