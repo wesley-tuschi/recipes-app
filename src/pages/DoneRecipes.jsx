@@ -78,7 +78,7 @@ function DoneRecipes() {
                 <img
                   src={ recipe.image }
                   // style={ { width: '200px' } }
-                  className={ style.img }
+                  className={ style.imgCard }
                   alt="meal img"
                   data-testid={ `${index}-horizontal-image` }
                 />
@@ -116,6 +116,7 @@ function DoneRecipes() {
                 <Link to={ `/${recipe.type}s/${recipe.id}` }>
                   <img
                     src={ recipe.image }
+                    className={ style.imgCard }
                     alt="meal img"
                     data-testid={ `${index}-horizontal-image` }
                   />
