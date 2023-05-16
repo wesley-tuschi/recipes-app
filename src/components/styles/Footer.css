@@ -10,3 +10,17 @@
   position: fixed;
   right: 0;
 }
+
+@media screen and ( max-width : 600px ) {
+
+  .footer {
+    flex-direction: row;
+    height: 80px;
+    justify-content: space-evenly;
+    padding: 10px;
+  }
+
+  .footer button {
+    flex-grow: 1;
+  }
+}

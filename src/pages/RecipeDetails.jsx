@@ -106,11 +106,12 @@ function RecipesDetails() {
         { recipe[`str${inha}`] }
       </h2>
 
-      <h3 data-testid="recipe-category">
+      <h3 data-testid="recipe-category" className="h3-container">
         { verifyType ? recipe.strCategory : recipe.strAlcoholic }
       </h3>
 
       <button
+        className="btn-share"
         onClick={ copyToClipboard }
         data-testid="share-btn"
       >
@@ -122,6 +123,7 @@ function RecipesDetails() {
         onClick={ () => saveFavorite() }
       >
         <img
+          className="btn-favorite"
           data-testid="favorite-btn"
           src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
           alt=" favorite button"
@@ -131,6 +133,7 @@ function RecipesDetails() {
       <br />
 
       <img
+        className="photo-details"
         data-testid="recipe-photo"
         src={ recipe[`str${inha}Thumb`] }
         alt="thumb"

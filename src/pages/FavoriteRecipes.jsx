@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import style from './styles/FavoriteRecipes.module.css';
+import './styles/FavoriteRecipes.css';
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [filter, setFilter] = useState('All');
+  const [isFavorite] = useState(true);
   const [copy, setCopy] = useState('');
   const history = useHistory();
 
@@ -45,17 +48,19 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div>
+    <div className="favorite-container">
       <header>
         <button onClick={ () => history.push('/profile') }>
           <img
+            className="favorite-icon-favorite"
             src={ profileIcon }
             alt="Profile Icon"
             data-testid="profile-top-btn"
           />
         </button>
-        <h2 data-testid="page-title">Favorite Recipes</h2>
+        <h2 className="h2-favorite-title" data-testid="page-title">Favorite Recipes</h2>
         <button
+          className="btn-favorite-all"
           onClick={ clearFilter }
           data-testid="filter-by-all-btn"
         >
@@ -63,6 +68,7 @@ function FavoriteRecipes() {
 
         </button>
         <button
+          className="btn-favorite-meals"
           onClick={ filterMeals }
           data-testid="filter-by-meal-btn"
         >
@@ -70,6 +76,7 @@ function FavoriteRecipes() {
 
         </button>
         <button
+          className="btn-favorite-drinks"
           onClick={ filterDrinks }
           data-testid="filter-by-drink-btn"
         >
@@ -115,7 +122,7 @@ function FavoriteRecipes() {
                 onClick={ () => removeFavorite(recipe.id) }
               >
                 <img
-                  src={ blackHeartIcon }
+                  src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
                   data-testid={ `${index}-horizontal-favorite-btn` }
                   alt=" favorite button"
                 />
@@ -162,7 +169,7 @@ function FavoriteRecipes() {
                   onClick={ () => removeFavorite(recipe.id) }
                 >
                   <img
-                    src={ blackHeartIcon }
+                    src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
                     data-testid={ `${index}-horizontal-favorite-btn` }
                     alt=" favorite button"
                   />

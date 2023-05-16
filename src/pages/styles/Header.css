@@ -28,3 +28,27 @@
   flex-grow: 1;
   justify-content: flex-end;
 }
+
+@media screen and ( max-width : 768px ) {
+
+  .header {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 10px 5px;
+  }
+
+  .header .header-logo {
+    flex-grow: 0;
+    margin-bottom: 10px;
+  }
+
+  .header .header-title {
+    flex-grow: 0;
+    margin-left: 0;
+  }
+
+  .header .profile-search-icons {
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}

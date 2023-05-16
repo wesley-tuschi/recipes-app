@@ -1,0 +1,122 @@
+/* Estilo para desktop */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.images-container {
+  align-items: center;
+  background: url('/home/marcos-ranauro/Trybe/Projetos/Turma 29 - Tribo A/sd-029-a-project-recipes-app/src/images/Background.png');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imgLogotipo {
+  margin-right: 2rem;
+  width: 12rem;
+}
+
+.imgTomate {
+  width: 18rem;
+}
+
+.form-login-container {
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 2rem;
+}
+
+.login {
+  color: #41197f;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.inputs-login-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20rem;
+}
+
+input {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+input::placeholder {
+  color: #41197f;
+}
+
+input:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+}
+
+.btn-login {
+  background-color: #fcc436;
+  border: none;
+  border-radius: 0.5rem;
+  color: #41197f;
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.btn-login:hover {
+  background-color: #388e3c;
+}
+
+.btn-login:disabled {
+  background-color: #b1adad;
+  cursor: not-allowed;
+}
+
+.btn-login:focus {
+  outline: none;
+}
+
+/* Estilo para dispositivos móveis */
+
+@media only screen and ( max-width : 768px ) {
+
+  .images-container {
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .imgLogotipo {
+    margin-bottom: 1rem;
+    margin-right: 0;
+  }
+
+  .imgTomate {
+    margin-top: 1rem;
+  }
+
+  .form-login-container {
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+
+  .inputs-login-container {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    width: 100%;
+  }
+}

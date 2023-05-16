@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import style from './styles/DoneRecipes.module.css';
+import './styles/DoneRecipes.css';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -37,17 +38,19 @@ function DoneRecipes() {
   };
 
   return (
-    <div>
+    <div className="doneRecipes-container">
       <header>
         <button onClick={ () => history.push('/profile') }>
           <img
+            className="profile-icon-done"
             src={ profileIcon }
             alt="Profile Icon"
             data-testid="profile-top-btn"
           />
         </button>
-        <h2 data-testid="page-title">Done Recipes</h2>
+        <h2 className="title-done" data-testid="page-title">Done Recipes</h2>
         <button
+          className="btn-done-all"
           onClick={ clearFilter }
           data-testid="filter-by-all-btn"
         >
@@ -55,6 +58,7 @@ function DoneRecipes() {
 
         </button>
         <button
+          className="btn-done-meals"
           onClick={ filterMeals }
           data-testid="filter-by-meal-btn"
         >
@@ -62,6 +66,7 @@ function DoneRecipes() {
 
         </button>
         <button
+          className="btn-done-drinks"
           onClick={ filterDrinks }
           data-testid="filter-by-drink-btn"
         >
@@ -70,7 +75,7 @@ function DoneRecipes() {
         </button>
 
       </header>
-      <section>
+      <section className="done-recipes-container">
         <ul>
           {filteredRecipes?.map((recipe, index) => (recipe.type === 'drink' ? (
             <li key={ recipe.name }>
@@ -78,7 +83,7 @@ function DoneRecipes() {
                 <img
                   src={ recipe.image }
                   // style={ { width: '200px' } }
-                  className={ style.imgCard }
+                  className={ style.img }
                   alt="meal img"
                   data-testid={ `${index}-horizontal-image` }
                 />
@@ -99,6 +104,7 @@ function DoneRecipes() {
 
               </p>
               <button
+                className="btn-done-share"
                 type="button"
                 onClick={ () => copyToClipboard(recipe.id) }
               >
@@ -116,7 +122,6 @@ function DoneRecipes() {
                 <Link to={ `/${recipe.type}s/${recipe.id}` }>
                   <img
                     src={ recipe.image }
-                    className={ style.imgCard }
                     alt="meal img"
                     data-testid={ `${index}-horizontal-image` }
                   />

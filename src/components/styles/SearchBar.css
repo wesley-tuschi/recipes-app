@@ -1,0 +1,94 @@
+.search-bar-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 0;
+  margin-bottom: 10px;
+}
+
+label {
+  align-items: center;
+  color: #45347f;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  font-weight: 700;
+  justify-content: center;
+}
+
+.search-bar-container input + label {
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  margin-right: 10px;
+  padding: 10px 20px;
+}
+
+
+.search-bar-container input + label:hover {
+  background-color: #ccc;
+}
+
+.search-bar-container input:checked + label {
+  background-color: #ccc;
+}
+
+.search-bar-container button {
+  background-color: #fcdc36;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.search-bar-container button:hover {
+  background-color: #45347f;
+}
+
+.search-bar-container input {
+  appearance: none;
+  border: 2px solid #333;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  margin-right: 10px;
+  position: relative;
+  top: 4px;
+  width: 20px;
+}
+
+.search-bar-container input:checked:before {
+  background-color: #333;
+  border-radius: 50%;
+  content: '';
+  height: 14px;
+  left: 3px;
+  position: absolute;
+  top: 3px;
+  width: 14px;
+}
+
+
+@media only screen and ( max-width : 768px ) {
+
+  .search-bar-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0;
+  }
+
+  .search-bar-container input {
+    margin-bottom: 8px;
+  }
+
+  .search-bar-btn {
+    margin-top: 16px;
+  }
+}

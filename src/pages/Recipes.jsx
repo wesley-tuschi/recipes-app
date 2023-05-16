@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import SearchBar from '../components/SearchBar';
 import RecipesCard from '../components/RecipesCard';
 import AppContext from '../context/AppContext';
+import './styles/Recipes.css';
 
 function Recipes() {
   const [foodsAPI, setFoodsAPI] = useState(null);
@@ -57,12 +58,13 @@ function Recipes() {
   );
 
   return (
-    <div>
+    <div className="searchbar-container">
 
       <Header />
       <SearchBar />
-      <div>
+      <div className="search-bttns-container">
         <button
+          className="search-bttns-all"
           type="button"
           data-testid="All-category-filter"
           onClick={ () => handleFilter('All') }
@@ -71,6 +73,7 @@ function Recipes() {
         </button>
         {categories.map((category) => (
           <button
+            className="search-bttns-category"
             key={ category.strCategory }
             type="button"
             data-testid={ `${category.strCategory}-category-filter` }

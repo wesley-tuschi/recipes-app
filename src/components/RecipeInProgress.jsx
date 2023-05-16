@@ -5,6 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import style from './styles/RecipesProgress.module.css';
+import './styles/RecipeInProgress.css';
 
 function RecipeInProgress() {
   const [recipes, setRecipes] = useState([]);
@@ -149,18 +150,31 @@ function RecipeInProgress() {
   };
 
   return (
-    <div>
+    <div className="progress-container">
       {recipes.map((recipe) => (
         <div key={ recipe.strDrink || recipe.strMeal }>
           <img
+            className="recipe-photo-progress"
             data-testid="recipe-photo"
             src={ recipe.strDrinkThumb || recipe.strMealThumb }
             alt=""
           />
-          <h2 data-testid="recipe-title">{recipe.strDrink || recipe.strMeal}</h2>
-          <span data-testid="recipe-category">{ recipe.strCategory }</span>
-          <h3>Ingredients</h3>
-          <div>
+          <h2
+            className="title-progress"
+            data-testid="recipe-title"
+          >
+            {recipe.strDrink || recipe.strMeal}
+
+          </h2>
+          <span
+            className="category-progress"
+            data-testid="recipe-category"
+          >
+            { recipe.strCategory }
+
+          </span>
+          <h3 className="h3-progress">Ingredients</h3>
+          <div className="ingredients-container">
             {Array.from({ length: 20 }).map((_, index) => {
               const ingredient = recipe[`strIngredient${index + 1}`];
               const isChecked = checkedIngredients[index];
@@ -188,15 +202,17 @@ function RecipeInProgress() {
             })}
           </div>
           <button
+            className="share-btn-progress"
             type="button"
             data-testid="share-btn"
             onClick={ copyToClipboard }
 
           >
-            <img src={ shareIcon } alt="share button" />
+            <img className="shareIcon-progress" src={ shareIcon } alt="share button" />
           </button>
           {copySucess && <p>{copySucess}</p>}
           <button
+            className="favorite-btn-progress"
             type="button"
             onClick={ () => saveFavorite() }
           >
@@ -207,9 +223,10 @@ function RecipeInProgress() {
             />
 
           </button>
-          <h3>Instructions</h3>
+          <h3 className="h3-container">Instructions</h3>
           <p data-testid="instructions">{recipe.strInstructions}</p>
           <button
+            className="finish-recipe-btn-progress"
             data-testid="finish-recipe-btn"
             type="button"
             disabled={ !isAllChecked }

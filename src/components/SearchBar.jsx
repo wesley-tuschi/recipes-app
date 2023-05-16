@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import { fetchAPI } from '../services/fetchAPI';
+import './styles/SearchBar.css';
 // import RecipesCard from './RecipesCard';
 
 function SearchBar() {
@@ -49,29 +50,42 @@ function SearchBar() {
   });
 
   return (
-    <div>
-      <input
-        type="radio"
-        data-testid="ingredient-search-radio"
-        name="filter"
-        value="Ingredient"
-        onChange={ ({ target }) => setFilter(target.value) }
-      />
-      <input
-        type="radio"
-        data-testid="name-search-radio"
-        name="filter"
-        value="Name"
-        onChange={ ({ target }) => setFilter(target.value) }
-      />
-      <input
-        type="radio"
-        data-testid="first-letter-search-radio"
-        name="filter"
-        value="First letter"
-        onChange={ ({ target }) => setFilter(target.value) }
-      />
+    <div className="search-bar-container">
+      <label>
+        <input
+          className="search-bar-radio1"
+          type="radio"
+          data-testid="ingredient-search-radio"
+          name="filter"
+          value="Ingredient"
+          onChange={ ({ target }) => setFilter(target.value) }
+        />
+        Ingredient
+      </label>
+      <label>
+        <input
+          className="search-bar-radio2"
+          type="radio"
+          data-testid="name-search-radio"
+          name="filter"
+          value="Name"
+          onChange={ ({ target }) => setFilter(target.value) }
+        />
+        Name
+      </label>
+      <label>
+        <input
+          className="search-bar-radio3"
+          type="radio"
+          data-testid="first-letter-search-radio"
+          name="filter"
+          value="First letter"
+          onChange={ ({ target }) => setFilter(target.value) }
+        />
+        First letter
+      </label>
       <button
+        className="search-bar-btn"
         data-testid="exec-search-btn"
         type="button"
         onClick={ handleSearch }

@@ -1,33 +1,129 @@
 .main-details {
-  margin-bottom: 100px;
-  width: 100vh;
+  align-items: center;
+  background-color: #f8d7da;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
-iframe {
-  aspect-ratio: 16 / 9;
-  border: 0;
-  max-width: 300px;
-  width: 100%;
+.photo-details {
+  margin: 20px 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .recom-container {
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: row;
+  margin: 20px 0;
+  -webkit-overflow-scrolling: touch;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
   width: 100%;
+}
+
+.recom-container::-webkit-scrollbar {
+  display: none;
 }
 
 .recom-img-container {
-  padding: 10px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  scroll-snap-align: start;
+  width: 150px;
 }
 
 .recom-img {
-  width: 330px;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+}
+
+.btn-share, .btn-favorite {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 0;
+}
+
+.btn-share img, .btn-favorite img {
+  width: 30px;
 }
 
 .btn-recipe-detail {
-  bottom: 0;
-  height: 40px;
-  position: fixed;
-  width: 100%;
+  background-color: crimson;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 20px;
+  padding: 10px 20px;
+}
+
+.btn-recipe-detail:hover {
+  background-color: #ff6961;
+}
+
+@media ( max-width : 767px ) {
+
+  .main-details {
+    padding: 10px;
+  }
+
+  .h3-container {
+    font-size: 18px;
+  }
+
+  .btn-share {
+    margin-bottom: 10px;
+  }
+
+  .photo-details {
+    width: 100%;
+  }
+
+  ul {
+    margin-top: 10px;
+  }
+
+  li {
+    font-size: 16px;
+  }
+
+  .recom-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    width: calc(100vw - 50px);
+  }
+
+  .recom-img-container {
+    flex: 0 0 calc((100vw - 50px) / 3);
+    height: 200px;
+    margin-right: 20px;
+  }
+
+  .recom-img-container:last-child {
+    margin-right: 0;
+  }
+
+  .recom-img {
+    border-radius: 10px;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
 }
