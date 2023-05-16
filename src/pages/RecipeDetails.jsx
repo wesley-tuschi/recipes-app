@@ -54,14 +54,12 @@ function RecipesDetails() {
 
   const verifyStorageDone = () => {
     const getStorage = JSON.parse(localStorage.getItem('doneRecipes'));
-    return getStorage && getStorage.some((recipeDone) => (
-      recipeDone.id === params.id));
+    return (getStorage && getStorage.doneDate !== null);
   };
 
   const verifyStorageProgress = () => {
     const getStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const type = verifyType ? 'meals' : 'drinks';
-    return getStorage && type in getStorage && params.id in getStorage[type];
+    return (getStorage && getStorage.drinks) || (getStorage && getStorage.meals !== null);
   };
 
   const copyToClipboard = () => {
@@ -88,12 +86,12 @@ function RecipesDetails() {
       const favoriteArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const isSame = favoriteArray.some((item) => item.id === favorite.id);
       const favoriteAtt = [...favoriteArray, favorite];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteAtt));
       if (isSame) {
         const updatedFavorites = favoriteArray.filter((item) => item.id !== favorite.id);
         localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavorites));
         setIsFavorite(false);
       } else {
-        localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteAtt));
         setIsFavorite(true);
       }
     } else {
