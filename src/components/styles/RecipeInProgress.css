@@ -1,132 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 .progress-container {
+  align-items: center;
   background-color: #f8d7da;
   display: flex;
-  flex-wrap: nowrap;
-  -webkit-overflow-scrolling: touch;
-  overflow-x: auto;
-}
-
-.progress-container > div {
-  flex-shrink: 0;
-  margin-right: 20px;
-  width: 300px;
-}
-
-.recipe-photo-progress {
-  border-radius: 10px;
-  height: 200px;
-  object-fit: cover;
-  width: 100%;
-}
-
-.title-progress {
-  font-size: 20px;
-  font-weight: 700;
-  margin: 10px 0;
-}
-
-.category-progress {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.h3-progress {
-  font-size: 18px;
-  margin-bottom: 10px;
-  margin-top: 20px;
+  flex-direction: column;
 }
 
 .ingredients-container {
+  /* background-color: red; */
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
-.checked {
-  text-decoration: line-through;
+.label-progress {
+  display: flex;
+  flex-direction: row;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
 }
 
-.unchecked {
-  text-decoration: none;
+.checkbox {
+  background: red;
+  margin: 0;
+  border: 0;
+  box-shadow: none;
+  width: 1rem;
+  margin-right: 0.5rem;
 }
 
-.share-btn-progress {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  margin-top: 20px;
+.h3-progress {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02rem;
 }
 
-.shareIcon-progress {
-  height: 30px;
-  width: 30px;
-}
-
-.favorite-btn-progress {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  margin-top: 20px;
+.in {
+  margin-bottom: 2rem;
 }
 
 .finish-recipe-btn-progress {
-  background-color: #fa0;
+  background-color: crimson;
   border: none;
-  border-radius: 10px;
+  bottom: 0;
   color: white;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 20px;
-  padding: 10px 20px;
-  transition: background-color 0.2s ease-in-out;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1rem;
+  /* position: fixed; */
+  width: 100%;
 }
 
-.finish-recipe-btn-progress:hover {
-  background-color: darkorange;
-}
-
-@media only screen and ( max-width : 768px ) {
-
-  .progress-container {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .recipe-photo-progress {
-    width: 80%;
-  }
-
-  .title-progress {
-    font-size: 24px;
-    margin: 10px 0;
-  }
-
-  .category-progress {
-    font-size: 18px;
-  }
-
-  .ingredients-container {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-  }
-
-  .share-btn-progress {
-    margin-top: 20px;
-  }
-
-  .favorite-btn-progress {
-    margin-top: 20px;
-  }
-
-  .h3-container {
-    margin-top: 20px;
-  }
-
-  .finish-recipe-btn-progress {
-    margin-top: 20px;
-  }
+.finish-recipe-btn-progress:disabled {
+  background-color: #b1adad;
+  cursor: not-allowed;
 }

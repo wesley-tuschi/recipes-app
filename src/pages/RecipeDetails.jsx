@@ -5,7 +5,6 @@ import { fetchAPI, fetchRecipes } from '../services/fetchAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-
 import './styles/RecipeDetails.css';
 
 function RecipesDetails() {
@@ -19,7 +18,6 @@ function RecipesDetails() {
   const inha = location.pathname.includes('meals') ? 'Meal' : 'Drink';
   const inhaFetch = location.pathname.includes('meals') ? 'Drink' : 'Meal';
   const verifyType = location.pathname.includes('meals');
-
   useEffect(() => {
     const API_RECIPE = location.pathname.includes('meals') ? (
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.id}`
@@ -36,30 +34,29 @@ function RecipesDetails() {
       setRecipe(data[0]);
     }
     fetchRecipe();
-
     async function fetchRecomendation() {
       const data = await fetchRecipes(location.pathname, API_RECOMENDATION);
       setRecomendation(data[`${inhaFetch.toLowerCase()}s`]);
     }
     fetchRecomendation();
-
     const storageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const isFav = storageFavorite && (
       storageFavorite.some((favorite) => favorite.id === params.id)
     );
     setIsFavorite(isFav);
-  }, [inhaFetch, location.pathname, params.id]);
-
+  }, []);
   const videoId = recipe.strYoutube && recipe.strYoutube.match(/v=([^&]+)/)[1];
 
   const verifyStorageDone = () => {
     const getStorage = JSON.parse(localStorage.getItem('doneRecipes'));
-    return (getStorage && getStorage.doneDate !== null);
+    return getStorage && getStorage.some((recipeDone) => (
+      recipeDone.id === params.id));
   };
 
   const verifyStorageProgress = () => {
     const getStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    return (getStorage && getStorage.drinks) || (getStorage && getStorage.meals !== null);
+    const type = verifyType ? 'meals' : 'drinks';
+    return getStorage && type in getStorage && params.id in getStorage[type];
   };
 
   const copyToClipboard = () => {
@@ -70,7 +67,6 @@ function RecipesDetails() {
     }
     setCopy('Link copied!');
   };
-
   const saveFavorite = () => {
     const favorite = {
       id: params.id,
@@ -81,17 +77,16 @@ function RecipesDetails() {
       name: (verifyType ? recipe.strMeal : recipe.strDrink),
       image: (verifyType ? recipe.strMealThumb : recipe.strDrinkThumb),
     };
-
     if (localStorage.favoriteRecipes) {
       const favoriteArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const isSame = favoriteArray.some((item) => item.id === favorite.id);
       const favoriteAtt = [...favoriteArray, favorite];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteAtt));
       if (isSame) {
         const updatedFavorites = favoriteArray.filter((item) => item.id !== favorite.id);
         localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavorites));
         setIsFavorite(false);
       } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteAtt));
         setIsFavorite(true);
       }
     } else {
@@ -102,45 +97,47 @@ function RecipesDetails() {
 
   return (
     <main className="main-details">
-      <h2 data-testid="recipe-title">
-        { recipe[`str${inha}`] }
-      </h2>
-
-      <h3 data-testid="recipe-category" className="h3-container">
-        { verifyType ? recipe.strCategory : recipe.strAlcoholic }
-      </h3>
-
-      <button
-        className="btn-share"
-        onClick={ copyToClipboard }
-        data-testid="share-btn"
-      >
-        <img src={ shareIcon } alt="share button" />
-      </button>
-      {copy && <p>{ copy }</p>}
-
-      <button
-        onClick={ () => saveFavorite() }
-      >
+      <div className="info-header">
         <img
-          className="btn-favorite"
-          data-testid="favorite-btn"
-          src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
-          alt=" favorite button"
+          className="photo-details"
+          data-testid="recipe-photo"
+          src={ recipe[`str${inha}Thumb`] }
+          alt="thumb"
+          width="300px"
         />
-      </button>
 
-      <br />
-
-      <img
-        className="photo-details"
-        data-testid="recipe-photo"
-        src={ recipe[`str${inha}Thumb`] }
-        alt="thumb"
-        width="300px"
-      />
-
-      <ul>
+        <div className='container-inside'>
+          <h2 className='title' data-testid="recipe-title">
+            { recipe[`str${inha}`] }
+          </h2>
+          
+          <h3 data-testid="recipe-category" className="h3-container">
+            { verifyType ? recipe.strCategory : recipe.strAlcoholic }
+          </h3>
+          <div className='btns-header'>
+            <button
+              className="btn-share"
+              onClick={ copyToClipboard }
+              data-testid="share-btn"
+            >
+              <img src={ shareIcon } alt="share button" />
+            </button>
+            {copy && <p>{ copy }</p>}
+            <button
+              className="btn-fav"
+              onClick={ () => saveFavorite() }
+            >
+              <img
+                className="btn-favorite"
+                data-testid="favorite-btn"
+                src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
+                alt=" favorite button"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul className='ul-details'>
         {
           Array.from({ length: 20 }).map((_, index) => {
             const ingredient = recipe[`strIngredient${index + 1}`];
@@ -148,6 +145,7 @@ function RecipesDetails() {
             if (ingredient && ingredient.trim()) {
               return (
                 <li
+                  className='li-details'
                   key={ `ingredient-${index}` }
                   data-testid={ `${index}-ingredient-name-and-measure` }
                 >
@@ -163,7 +161,7 @@ function RecipesDetails() {
       </ul>
 
       <p
-        style={ { whiteSpace: 'pre-line' } }
+        className='instructions'
         data-testid="instructions"
       >
         { recipe.strInstructions }
@@ -196,6 +194,7 @@ function RecipesDetails() {
                     alt="thumb"
                   />
                   <h5
+                    className='recom-title'
                     data-testid={ `${index}-recommendation-title` }
                   >
                     {recom[`str${inhaFetch}`]}

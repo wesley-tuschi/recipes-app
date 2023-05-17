@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 .search-bar-container {
   align-items: center;
   display: flex;
@@ -41,7 +42,11 @@ label {
   background-color: #fcdc36;
   border: none;
   border-radius: 5px;
-  color: black;
+  color: #45347f;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
   cursor: pointer;
   padding: 10px 20px;
 }

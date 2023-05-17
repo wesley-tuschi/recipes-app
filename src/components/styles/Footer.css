@@ -1,15 +1,28 @@
 .footer {
   align-items: center;
   background-color: #45347f;
-  border-top: 1px solid #dee2e6;
   bottom: 0;
   display: flex;
   height: 60px;
-  justify-content: space-around;
+  justify-content: flex-end;
   left: 0;
   position: fixed;
   right: 0;
 }
+
+.meal-btn, .drink-btn {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.meal-img img, .drink-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
 
 @media screen and ( max-width : 600px ) {
 

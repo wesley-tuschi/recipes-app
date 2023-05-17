@@ -3,8 +3,8 @@ import { useLocation, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import logo from '../images/logo.svg';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinkIconHeader.svg';
+import mealIcon from '../images/mealIconHeader.svg';
 import AppContext from '../context/AppContext';
 
 import '../pages/styles/Header.css';
@@ -20,8 +20,9 @@ function Header() {
 
     if (pagesWithSearch.includes(location.pathname)) {
       return (
-        <button onClick={ () => setIsSearchVisible(!isSearchVisible) }>
+        <button className='search-top' onClick={ () => setIsSearchVisible(!isSearchVisible) }>
           <img
+            className='search-top-btn'
             src={ searchIcon }
             alt="Search Icon"
             data-testid="search-top-btn"
@@ -88,8 +89,9 @@ function Header() {
         />
       </div>
       <div className="profile-search-icons">
-        <button onClick={ () => history.push('/profile') }>
+        <button className='profile-top' onClick={ () => history.push('/profile') }>
           <img
+            className='profile-top-btn'
             src={ profileIcon }
             alt="Profile Icon"
             data-testid="profile-top-btn"

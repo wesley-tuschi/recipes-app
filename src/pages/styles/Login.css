@@ -5,9 +5,14 @@
   padding: 0;
 }
 
+.main-login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .images-container {
-  align-items: center;
-  background: url('/home/marcos-ranauro/Trybe/Projetos/Turma 29 - Tribo A/sd-029-a-project-recipes-app/src/images/Background.png');
+  background: url('../../images/Background.png');
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,6 +21,7 @@
 .imgLogotipo {
   margin-right: 2rem;
   width: 12rem;
+  align-self: center;
 }
 
 .imgTomate {
@@ -32,6 +38,8 @@
   justify-content: center;
   margin-top: 2rem;
   padding: 2rem;
+  width: 90%;
+  align-self: center;
 }
 
 .login {
@@ -97,16 +105,16 @@ input:focus {
 
   .images-container {
     flex-direction: column;
-    margin-top: 1rem;
   }
 
   .imgLogotipo {
-    margin-bottom: 1rem;
-    margin-right: 0;
+    margin: 1rem 0 0 0;
   }
 
   .imgTomate {
-    margin-top: 1rem;
+    margin-top: -1rem;
+    flex-direction: row;
+    justify-content: flex-start;
   }
 
   .form-login-container {

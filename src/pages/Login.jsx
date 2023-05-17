@@ -34,7 +34,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className='main-login'>
       <div className="images-container">
         <img className="imgLogotipo" src={ logoRecipes } alt="logotipo" />
         <img className="imgTomate" src={ logoTomato } alt="imagem de tomates" />

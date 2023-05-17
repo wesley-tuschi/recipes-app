@@ -1,14 +1,92 @@
-.doneRecipes-container {
-  align-items: center;
-  background-color: #f8d7da;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+.doneRecipes-container, .favorite-container {
   display: flex;
   flex-direction: column;
-  margin: 20px auto;
-  max-width: 800px;
-  padding-top: 70px;
+  justify-content: center;
+  align-items: center;
 }
 
-.doneRecipes-container header {
+.header-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.btns-done, .btns-favorite {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.profile-done, .share-done, .favorite-icon {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.share-done {
+  margin-right:  1rem;
+  height: 1rem;
+}
+
+.title-done {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 1rem 0;
+  color: #41197f;
+}
+
+.btn-done-all, .btn-done-meals, .btn-done-drinks, .btn-favorite-all, .btn-favorite-meals, .btn-favorite-drinks {
+  background: #41197f;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.7rem;
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.container-done {
+  display: flex;
+  flex-direction: row;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  justify-content: space-between;
+  border-radius: 1rem;
+  height: 110px;
+  width: 350px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.img-done {
+  width: 110px;
+  border-radius: 1rem 0rem 0 1rem;
+}
+
+.done-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-done-details {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 700;
+  color: #45347f;
+}
+
+.details-done {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 400;
+  color: #45347f;
+}
+
+/* .doneRecipes-container header {
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -168,4 +246,4 @@
   height: 20px;
   margin-right: 5px;
   width: 20px;
-}
+} */

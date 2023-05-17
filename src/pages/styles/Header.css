@@ -29,6 +29,19 @@
   justify-content: flex-end;
 }
 
+.search-top, .profile-top {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.search-top img, .profile-top img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
 @media screen and ( max-width : 768px ) {
 
   .header {

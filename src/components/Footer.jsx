@@ -10,14 +10,26 @@ function Footer() {
   return (
     <footer data-testid="footer" className="footer">
       <button
+        className='meal-btn'
         onClick={ () => history.push('/meals') }
       >
-        <img src={ mealIcon } alt="Meals Icon" data-testid="meals-bottom-btn" />
+        <img
+          className='meal-img'
+          src={ mealIcon }
+          alt="Meals Icon"
+          data-testid="meals-bottom-btn"
+        />
       </button>
       <button
+        className='drink-btn'
         onClick={ () => history.push('/drinks') }
       >
-        <img src={ drinkIcon } alt="Drinks Icon" data-testid="drinks-bottom-btn" />
+        <img
+          className='drink-img'
+          src={ drinkIcon }
+          alt="Drinks Icon"
+          data-testid="drinks-bottom-btn"
+        />
       </button>
     </footer>
   );

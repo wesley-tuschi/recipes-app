@@ -105,7 +105,7 @@ function RecipeInProgress() {
       tags,
       alcoholicOrNot: recipes[0].strAlcoholic || '',
       type: page.includes('meals') ? 'meal' : 'drink',
-      doneDate: dateNow.toISOString(),
+      doneDate: dateNow.toISOString().split('T')[0],
     };
 
     const existingDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
@@ -153,27 +153,59 @@ function RecipeInProgress() {
     <div className="progress-container">
       {recipes.map((recipe) => (
         <div key={ recipe.strDrink || recipe.strMeal }>
-          <img
-            className="recipe-photo-progress"
-            data-testid="recipe-photo"
-            src={ recipe.strDrinkThumb || recipe.strMealThumb }
-            alt=""
-          />
-          <h2
-            className="title-progress"
-            data-testid="recipe-title"
-          >
-            {recipe.strDrink || recipe.strMeal}
+          <div className="info-header">
+            <img
+              className="photo-details"
+              data-testid="recipe-photo"
+              src={ recipe.strDrinkThumb || recipe.strMealThumb }
+              alt=""
+            />
 
-          </h2>
-          <span
-            className="category-progress"
-            data-testid="recipe-category"
-          >
-            { recipe.strCategory }
+            <div className='container-inside'>
+              <h2
+                className="title"
+                data-testid="recipe-title"
+              >
+                {recipe.strDrink || recipe.strMeal}
 
-          </span>
+              </h2>
+              <h3
+                className="h3-container"
+                data-testid="recipe-category"
+              >
+                { recipe.strCategory }
+
+              </h3>
+              <div className='btns-header'>
+                <button
+                  className="btn-share"
+                  type="button"
+                  data-testid="share-btn"
+                  onClick={ copyToClipboard }
+
+                >
+                  <img className="shareIcon-progress" src={ shareIcon } alt="share button" />
+                </button>
+                {copySucess && <p>{copySucess}</p>}
+                <button
+                  className="btn-fav"
+                  type="button"
+                  onClick={ () => saveFavorite() }
+                >
+                  <img
+                    className="btn-favorite"
+                    src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
+                    data-testid="favorite-btn"
+                    alt=" favorite button"
+                  />
+                </button>
+              </div>
+            </div>
+
+          </div>
+          
           <h3 className="h3-progress">Ingredients</h3>
+
           <div className="ingredients-container">
             {Array.from({ length: 20 }).map((_, index) => {
               const ingredient = recipe[`strIngredient${index + 1}`];
@@ -182,18 +214,19 @@ function RecipeInProgress() {
               if (ingredient && ingredient.trim()) {
                 return (
                   <label
-                    className={ isChecked ? `${style.checked}` : `${style.unchecked}` }
+                    className={ isChecked ? `${style.checked} label-progress` : `${style.unchecked} label-progress` }
                     htmlFor={ index }
                     key={ index }
                     data-testid={ `${index}-ingredient-step` }
                   >
                     <input
+                      className='checkbox'
                       type="checkbox"
                       checked={ !!isChecked }
                       id={ index }
                       onChange={ () => handleCheckIngredient(index) }
                     />
-                    {ingredient}
+                    <p>{ingredient}</p>
                   </label>
                 );
               }
@@ -201,30 +234,8 @@ function RecipeInProgress() {
               return null;
             })}
           </div>
-          <button
-            className="share-btn-progress"
-            type="button"
-            data-testid="share-btn"
-            onClick={ copyToClipboard }
-
-          >
-            <img className="shareIcon-progress" src={ shareIcon } alt="share button" />
-          </button>
-          {copySucess && <p>{copySucess}</p>}
-          <button
-            className="favorite-btn-progress"
-            type="button"
-            onClick={ () => saveFavorite() }
-          >
-            <img
-              src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
-              data-testid="favorite-btn"
-              alt=" favorite button"
-            />
-
-          </button>
-          <h3 className="h3-container">Instructions</h3>
-          <p data-testid="instructions">{recipe.strInstructions}</p>
+          <h3 className="h3-progress">Instructions</h3>
+          <p className="instructions in" data-testid="instructions">{recipe.strInstructions}</p>
           <button
             className="finish-recipe-btn-progress"
             data-testid="finish-recipe-btn"

@@ -49,8 +49,8 @@ function FavoriteRecipes() {
 
   return (
     <div className="favorite-container">
-      <header>
-        <button onClick={ () => history.push('/profile') }>
+      <header className='header-container'>
+        <button className='favorite-icon' onClick={ () => history.push('/profile') }>
           <img
             className="favorite-icon-favorite"
             src={ profileIcon }
@@ -58,66 +58,107 @@ function FavoriteRecipes() {
             data-testid="profile-top-btn"
           />
         </button>
-        <h2 className="h2-favorite-title" data-testid="page-title">Favorite Recipes</h2>
-        <button
-          className="btn-favorite-all"
-          onClick={ clearFilter }
-          data-testid="filter-by-all-btn"
-        >
-          All
-
-        </button>
-        <button
-          className="btn-favorite-meals"
-          onClick={ filterMeals }
-          data-testid="filter-by-meal-btn"
-        >
-          Meals
-
-        </button>
-        <button
-          className="btn-favorite-drinks"
-          onClick={ filterDrinks }
-          data-testid="filter-by-drink-btn"
-        >
-          Drinks
-
-        </button>
+        <h2 className="title-done" data-testid="page-title">Favorite Recipes</h2>
+        <div className='btns-favorite'>
+          <button
+            className="btn-favorite-all"
+            onClick={ clearFilter }
+            data-testid="filter-by-all-btn"
+          >
+            All
+          </button>
+          <button
+            className="btn-favorite-meals"
+            onClick={ filterMeals }
+            data-testid="filter-by-meal-btn"
+          >
+            Meals
+          </button>
+          <button
+            className="btn-favorite-drinks"
+            onClick={ filterDrinks }
+            data-testid="filter-by-drink-btn"
+          >
+            Drinks
+          </button>
+        </div>
 
       </header>
-      <section>
-        <ul>
-          {filteredRecipes?.map((recipe, index) => (recipe.type === 'drink' ? (
-            <li key={ recipe.name }>
+      <section className="done-recipes-container">
+        {filteredRecipes?.map((recipe, index) => (recipe.type === 'drink' ? (
+          <div className='container-done' key={ recipe.name }>
+            <Link to={ `/${recipe.type}s/${recipe.id}` }>
+              <img
+                src={ recipe.image }
+                className='img-done'
+                alt="meal img"
+                data-testid={ `${index}-horizontal-image` }
+              />
+            </Link>
+            <div className="done-details">
+              <Link style={{ textDecoration: 'none' }} to={ `${recipe.type}s/${recipe.id}` }>
+                <p className='title-done-details' data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+              </Link>
+              <span
+                className='details-done'
+                data-testid={ `${index}-horizontal-top-text` }
+              >
+                {recipe.alcoholicOrNot}
+              </span>
+            </div>
+            <button
+              className='share-done'
+              type="button"
+              onClick={ () => removeFavorite(recipe.id) }
+            >
+              <img
+                src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
+                data-testid={ `${index}-horizontal-favorite-btn` }
+                alt=" favorite button"
+              />
+
+            </button>
+            <button
+              className='share-done'
+              type="button"
+              onClick={ () => copyToClipboard(recipe.type, recipe.id) }
+            >
+              <img
+                src={ shareIcon }
+                data-testid={ `${index}-horizontal-share-btn` }
+                alt="share button"
+              />
+            </button>
+            {copy && <p>{ copy }</p>}
+          </div>
+        )
+          : (
+            <div className='container-done' key={ recipe.name }>
               <Link to={ `/${recipe.type}s/${recipe.id}` }>
                 <img
                   src={ recipe.image }
-                  className={ style.imgCard }
+                  className='img-done'
                   alt="meal img"
                   data-testid={ `${index}-horizontal-image` }
                 />
               </Link>
-              <Link to={ `${recipe.type}s/${recipe.id}` }>
-                <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
-              </Link>
-              <span
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                {recipe.alcoholicOrNot}
-
-              </span>
+              <div className='done-details'>
+                <Link style={{ textDecoration: 'none' }} to={ `${recipe.type}s/${recipe.id}` }>
+                  <p className='title-done-details' data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+                </Link>
+                <span
+                  className='details-done'
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  {recipe.nationality}
+                  {' '}
+                  -
+                  {' '}
+                  {recipe.category}
+                </span>
+              </div>
               <button
-                type="button"
-                onClick={ () => copyToClipboard(recipe.type, recipe.id) }
-              >
-                <img
-                  src={ shareIcon }
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  alt="share button"
-                />
-              </button>
-              {copy && <p>{ copy }</p>}
-              <button
+                className='share-done'
                 type="button"
                 onClick={ () => removeFavorite(recipe.id) }
               >
@@ -128,56 +169,20 @@ function FavoriteRecipes() {
                 />
 
               </button>
-            </li>
-          )
-            : (
-              <li key={ recipe.name }>
-                <Link to={ `/${recipe.type}s/${recipe.id}` }>
-                  <img
-                    src={ recipe.image }
-                    className={ style.imgCard }
-                    alt="meal img"
-                    data-testid={ `${index}-horizontal-image` }
-                  />
-                </Link>
-                {console.log(index)}
-                <Link to={ `${recipe.type}s/${recipe.id}` }>
-                  <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
-                </Link>
-                <span
-                  data-testid={ `${index}-horizontal-top-text` }
-                >
-                  {recipe.nationality}
-                  {' '}
-                  -
-                  {' '}
-                  {recipe.category}
-                </span>
-                <button
-                  type="button"
-                  onClick={ () => copyToClipboard(recipe.type, recipe.id) }
-                >
-                  <img
-                    src={ shareIcon }
-                    data-testid={ `${index}-horizontal-share-btn` }
-                    alt="share button"
-                  />
-                </button>
-                {copy && <p>{ copy }</p>}
-                <button
-                  type="button"
-                  onClick={ () => removeFavorite(recipe.id) }
-                >
-                  <img
-                    src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
-                    data-testid={ `${index}-horizontal-favorite-btn` }
-                    alt=" favorite button"
-                  />
-
-                </button>
-              </li>
-            )))}
-        </ul>
+              <button
+                className='share-done'
+                type="button"
+                onClick={ () => copyToClipboard(recipe.type, recipe.id) }
+              >
+                <img
+                  src={ shareIcon }
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  alt="share button"
+                />
+              </button>
+              {copy && <p>{ copy }</p>}
+            </div>
+          )))}
       </section>
     </div>
   );
