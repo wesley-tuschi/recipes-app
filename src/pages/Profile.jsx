@@ -26,7 +26,7 @@ function Profile() {
 
   return (
     <header className="profile-container">
-      <button className='profile-done' onClick={ () => history.push('/profile') }>
+      <button className="profile-done" onClick={ () => history.push('/profile') }>
         <img
           className="profile-icon"
           src={ profileIcon }

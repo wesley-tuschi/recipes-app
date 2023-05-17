@@ -10,22 +10,22 @@ function Footer() {
   return (
     <footer data-testid="footer" className="footer">
       <button
-        className='meal-btn'
+        className="meal-btn"
         onClick={ () => history.push('/meals') }
       >
         <img
-          className='meal-img'
+          className="meal-img"
           src={ mealIcon }
           alt="Meals Icon"
           data-testid="meals-bottom-btn"
         />
       </button>
       <button
-        className='drink-btn'
+        className="drink-btn"
         onClick={ () => history.push('/drinks') }
       >
         <img
-          className='drink-img'
+          className="drink-img"
           src={ drinkIcon }
           alt="Drinks Icon"
           data-testid="drinks-bottom-btn"

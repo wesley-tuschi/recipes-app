@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
-import style from './styles/DoneRecipes.module.css';
+// import style from './styles/DoneRecipes.module.css';
 import './styles/DoneRecipes.css';
 
 function DoneRecipes() {
@@ -39,8 +39,8 @@ function DoneRecipes() {
 
   return (
     <div className="doneRecipes-container">
-      <header className='header-container'>
-        <button className='profile-done' onClick={ () => history.push('/profile') }>
+      <header className="header-container">
+        <button className="profile-done" onClick={ () => history.push('/profile') }>
           <img
             className="profile-icon-done"
             src={ profileIcon }
@@ -49,7 +49,7 @@ function DoneRecipes() {
           />
         </button>
         <h2 className="title-done" data-testid="page-title">Done Recipes</h2>
-        <div className='btns-done'>
+        <div className="btns-done">
           <button
             className="btn-done-all"
             onClick={ clearFilter }
@@ -75,27 +75,35 @@ function DoneRecipes() {
       </header>
       <section className="done-recipes-container">
         {filteredRecipes?.map((recipe, index) => (recipe.type === 'drink' ? (
-          <div className='container-done' key={ recipe.name }>
+          <div className="container-done" key={ recipe.name }>
             <Link to={ `/${recipe.type}s/${recipe.id}` }>
               <img
                 src={ recipe.image }
-                className='img-done'
+                className="img-done"
                 alt="meal img"
                 data-testid={ `${index}-horizontal-image` }
               />
             </Link>
-            <div className='done-details'>
-              <Link style={{ textDecoration: 'none' }} to={ `${recipe.type}s/${recipe.id}` }>
-                <p className='title-done-details' data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+            <div className="done-details">
+              <Link
+                style={ { textDecoration: 'none' } }
+                to={ `${recipe.type}s/${recipe.id}` }
+              >
+                <p
+                  className="title-done-details"
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  {recipe.name}
+                </p>
               </Link>
               <span
-                className='details-done'
+                className="details-done"
                 data-testid={ `${index}-horizontal-top-text` }
               >
                 {recipe.alcoholicOrNot}
               </span>
               <p
-                className='details-done'
+                className="details-done"
                 data-testid={ `${index}-horizontal-done-date` }
               >
                 {recipe.doneDate}
@@ -116,21 +124,29 @@ function DoneRecipes() {
           </div>
         )
           : (
-            <div className='container-done' key={ recipe.name }>
+            <div className="container-done" key={ recipe.name }>
               <Link to={ `/${recipe.type}s/${recipe.id}` }>
                 <img
-                  className='img-done'
+                  className="img-done"
                   src={ recipe.image }
                   alt="meal img"
                   data-testid={ `${index}-horizontal-image` }
                 />
               </Link>
-              <div className='done-details'>
-                <Link style={{ textDecoration: 'none' }}  to={ `${recipe.type}s/${recipe.id}` }>
-                  <p className='title-done-details' data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+              <div className="done-details">
+                <Link
+                  style={ { textDecoration: 'none' } }
+                  to={ `${recipe.type}s/${recipe.id}` }
+                >
+                  <p
+                    className="title-done-details"
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    {recipe.name}
+                  </p>
                 </Link>
                 <span
-                  className='details-done'
+                  className="details-done"
                   data-testid={ `${index}-horizontal-top-text` }
                 >
                   {recipe.nationality}
@@ -140,14 +156,14 @@ function DoneRecipes() {
                   {recipe.category}
                 </span>
                 <p
-                  className='details-done'
+                  className="details-done"
                   data-testid={ `${index}-horizontal-done-date` }
                 >
                   {recipe.doneDate}
                 </p>
                 {recipe.tags.map((tag) => (
                   <p
-                    className='details-done'
+                    className="details-done"
                     key={ tag }
                     data-testid={ `${index}-${tag}-horizontal-tag` }
                   >
@@ -156,7 +172,7 @@ function DoneRecipes() {
                 ))}
               </div>
               <button
-                className='share-done'
+                className="share-done"
                 type="button"
                 onClick={ () => copyToClipboard(recipe.id) }
               >

@@ -106,21 +106,24 @@ function RecipesDetails() {
           width="300px"
         />
 
-        <div className='container-inside'>
-          <h2 className='title' data-testid="recipe-title">
+        <div className="container-inside">
+          <h2 className="title" data-testid="recipe-title">
             { recipe[`str${inha}`] }
           </h2>
-          
+
           <h3 data-testid="recipe-category" className="h3-container">
             { verifyType ? recipe.strCategory : recipe.strAlcoholic }
           </h3>
-          <div className='btns-header'>
+          <div className="btns-header">
             <button
               className="btn-share"
               onClick={ copyToClipboard }
               data-testid="share-btn"
             >
-              <img src={ shareIcon } alt="share button" />
+              <img
+                src={ shareIcon }
+                alt="share button"
+              />
             </button>
             {copy && <p>{ copy }</p>}
             <button
@@ -137,7 +140,7 @@ function RecipesDetails() {
           </div>
         </div>
       </div>
-      <ul className='ul-details'>
+      <ul className="ul-details">
         {
           Array.from({ length: 20 }).map((_, index) => {
             const ingredient = recipe[`strIngredient${index + 1}`];
@@ -145,7 +148,7 @@ function RecipesDetails() {
             if (ingredient && ingredient.trim()) {
               return (
                 <li
-                  className='li-details'
+                  className="li-details"
                   key={ `ingredient-${index}` }
                   data-testid={ `${index}-ingredient-name-and-measure` }
                 >
@@ -161,7 +164,7 @@ function RecipesDetails() {
       </ul>
 
       <p
-        className='instructions'
+        className="instructions"
         data-testid="instructions"
       >
         { recipe.strInstructions }
@@ -194,7 +197,7 @@ function RecipesDetails() {
                     alt="thumb"
                   />
                   <h5
-                    className='recom-title'
+                    className="recom-title"
                     data-testid={ `${index}-recommendation-title` }
                   >
                     {recom[`str${inhaFetch}`]}

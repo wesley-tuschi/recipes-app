@@ -16,7 +16,7 @@ function RecipesCard({ recipes }) {
           className="card-container"
         >
           <Link
-            style={{ textDecoration: 'none' }}
+            style={ { textDecoration: 'none' } }
             to={ food.idDrink ? `/drinks/${food.idDrink}` : `/meals/${food.idMeal}` }
           >
             <img

@@ -16,7 +16,6 @@ function RecipeInProgress() {
   const recipeId = useParams();
   const history = useHistory();
   const location = useLocation();
-
   const mealPage = location.pathname;
   const page = mealPage.includes('meals') ? '/meals' : '/drinks';
   let endpoint;
@@ -25,7 +24,6 @@ function RecipeInProgress() {
   } else if (page.includes('drinks')) {
     endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recipeId.id}`;
   }
-
   const copyToClipboard = () => {
     if (page.includes('meals')) {
       navigator.clipboard.writeText(`http://localhost:3000/meals/${recipeId.id}`);
@@ -34,7 +32,6 @@ function RecipeInProgress() {
     }
     setCopySucess('Link copied!');
   };
-
   useEffect(() => {
     const getRecipes = async () => {
       const data = await fetchAPI(page, endpoint);
@@ -42,7 +39,6 @@ function RecipeInProgress() {
     };
     getRecipes();
   }, [endpoint, page, recipeId.id]);
-
   useEffect(() => {
     const inProgressRecipes = JSON
       .parse(localStorage.getItem('inProgressRecipes')) || {};
@@ -51,7 +47,6 @@ function RecipeInProgress() {
     const checkedIngredient = recipeInProgress[recipeId.id] || [];
     setCheckedIngredients(checkedIngredient);
   }, [page, recipeId.id]);
-
   useEffect(() => {
     const storageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const isFav = storageFavorite && (
@@ -59,7 +54,6 @@ function RecipeInProgress() {
     );
     setIsFavorite(isFav);
   }, [recipeId.id]);
-
   useEffect(() => {
     const checkAllIngredients = () => {
       if (!recipes.length) {
@@ -70,20 +64,16 @@ function RecipeInProgress() {
           .includes('strIngredient')
            && typeof recipes[0][key] === 'string'
            && recipes[0][key].trim() !== '').length;
-
       const allChecked = checkedIngredients.length === ingredientsCount
         && checkedIngredients.every(Boolean);
-
       setIsAllChecked(allChecked);
     };
     checkAllIngredients();
   }, [checkedIngredients, recipes]);
-
   const handleCheckIngredient = (index) => {
     const newCheckedIngredients = [...checkedIngredients];
     newCheckedIngredients[index] = !newCheckedIngredients[index];
     setCheckedIngredients(newCheckedIngredients);
-
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
     const recipeType = page.includes('meals') ? 'meals' : 'drinks';
     const recipeInProgress = inProgressRecipes[recipeType] || {};
@@ -91,7 +81,6 @@ function RecipeInProgress() {
     inProgressRecipes[recipeType] = recipeInProgress;
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
   };
-
   const handleFinishRecipe = () => {
     const dateNow = new Date();
     const tagsArray = recipes[0].strTags ? recipes[0].strTags.split(',') : [];
@@ -107,19 +96,15 @@ function RecipeInProgress() {
       type: page.includes('meals') ? 'meal' : 'drink',
       doneDate: dateNow.toISOString().split('T')[0],
     };
-
     const existingDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
     const isRecipeAlreadyDone = existingDoneRecipes
       .some((recipe) => recipe.id === doneRecipe.id);
-
     if (!isRecipeAlreadyDone) {
       existingDoneRecipes.push(doneRecipe);
       localStorage.setItem('doneRecipes', JSON.stringify(existingDoneRecipes));
     }
-
     history.push('/done-recipes');
   };
-
   const saveFavorite = () => {
     const favorite = {
       id: recipes[0].idMeal || recipes[0].idDrink,
@@ -130,7 +115,6 @@ function RecipeInProgress() {
       name: recipes[0].strDrink || recipes[0].strMeal,
       image: recipes[0].strDrinkThumb || recipes[0].strMealThumb,
     };
-
     if (localStorage.favoriteRecipes) {
       const favoriteArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const isSame = favoriteArray.some((item) => item.id === favorite.id);
@@ -148,7 +132,6 @@ function RecipeInProgress() {
       setIsFavorite(true);
     }
   };
-
   return (
     <div className="progress-container">
       {recipes.map((recipe) => (
@@ -160,31 +143,31 @@ function RecipeInProgress() {
               src={ recipe.strDrinkThumb || recipe.strMealThumb }
               alt=""
             />
-
-            <div className='container-inside'>
+            <div className="container-inside">
               <h2
                 className="title"
                 data-testid="recipe-title"
               >
                 {recipe.strDrink || recipe.strMeal}
-
               </h2>
               <h3
                 className="h3-container"
                 data-testid="recipe-category"
               >
                 { recipe.strCategory }
-
               </h3>
-              <div className='btns-header'>
+              <div className="btns-header">
                 <button
                   className="btn-share"
                   type="button"
                   data-testid="share-btn"
                   onClick={ copyToClipboard }
-
                 >
-                  <img className="shareIcon-progress" src={ shareIcon } alt="share button" />
+                  <img
+                    className="shareIcon-progress"
+                    src={ shareIcon }
+                    alt="share button"
+                  />
                 </button>
                 {copySucess && <p>{copySucess}</p>}
                 <button
@@ -201,26 +184,25 @@ function RecipeInProgress() {
                 </button>
               </div>
             </div>
-
           </div>
-          
           <h3 className="h3-progress">Ingredients</h3>
-
           <div className="ingredients-container">
             {Array.from({ length: 20 }).map((_, index) => {
               const ingredient = recipe[`strIngredient${index + 1}`];
               const isChecked = checkedIngredients[index];
-
               if (ingredient && ingredient.trim()) {
                 return (
                   <label
-                    className={ isChecked ? `${style.checked} label-progress` : `${style.unchecked} label-progress` }
+                    className={
+                      isChecked ? `${style.checked}
+                      label-progress` : `${style.unchecked} label-progress`
+                    }
                     htmlFor={ index }
                     key={ index }
                     data-testid={ `${index}-ingredient-step` }
                   >
                     <input
-                      className='checkbox'
+                      className="checkbox"
                       type="checkbox"
                       checked={ !!isChecked }
                       id={ index }
@@ -230,12 +212,16 @@ function RecipeInProgress() {
                   </label>
                 );
               }
-
               return null;
             })}
           </div>
           <h3 className="h3-progress">Instructions</h3>
-          <p className="instructions in" data-testid="instructions">{recipe.strInstructions}</p>
+          <p
+            className="instructions in"
+            data-testid="instructions"
+          >
+            {recipe.strInstructions}
+          </p>
           <button
             className="finish-recipe-btn-progress"
             data-testid="finish-recipe-btn"
@@ -244,7 +230,6 @@ function RecipeInProgress() {
             onClick={ handleFinishRecipe }
           >
             Finish Recipe
-
           </button>
         </div>
       ))}

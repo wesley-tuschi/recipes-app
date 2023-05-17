@@ -4,7 +4,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
-import style from './styles/FavoriteRecipes.module.css';
+// import style from './styles/FavoriteRecipes.module.css';
 import './styles/FavoriteRecipes.css';
 
 function FavoriteRecipes() {
@@ -49,8 +49,8 @@ function FavoriteRecipes() {
 
   return (
     <div className="favorite-container">
-      <header className='header-container'>
-        <button className='favorite-icon' onClick={ () => history.push('/profile') }>
+      <header className="header-container">
+        <button className="favorite-icon" onClick={ () => history.push('/profile') }>
           <img
             className="favorite-icon-favorite"
             src={ profileIcon }
@@ -59,7 +59,7 @@ function FavoriteRecipes() {
           />
         </button>
         <h2 className="title-done" data-testid="page-title">Favorite Recipes</h2>
-        <div className='btns-favorite'>
+        <div className="btns-favorite">
           <button
             className="btn-favorite-all"
             onClick={ clearFilter }
@@ -86,28 +86,36 @@ function FavoriteRecipes() {
       </header>
       <section className="done-recipes-container">
         {filteredRecipes?.map((recipe, index) => (recipe.type === 'drink' ? (
-          <div className='container-done' key={ recipe.name }>
+          <div className="container-done" key={ recipe.name }>
             <Link to={ `/${recipe.type}s/${recipe.id}` }>
               <img
                 src={ recipe.image }
-                className='img-done'
+                className="img-done"
                 alt="meal img"
                 data-testid={ `${index}-horizontal-image` }
               />
             </Link>
             <div className="done-details">
-              <Link style={{ textDecoration: 'none' }} to={ `${recipe.type}s/${recipe.id}` }>
-                <p className='title-done-details' data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+              <Link
+                style={ { textDecoration: 'none' } }
+                to={ `${recipe.type}s/${recipe.id}` }
+              >
+                <p
+                  className="title-done-details"
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  {recipe.name}
+                </p>
               </Link>
               <span
-                className='details-done'
+                className="details-done"
                 data-testid={ `${index}-horizontal-top-text` }
               >
                 {recipe.alcoholicOrNot}
               </span>
             </div>
             <button
-              className='share-done'
+              className="share-done"
               type="button"
               onClick={ () => removeFavorite(recipe.id) }
             >
@@ -119,7 +127,7 @@ function FavoriteRecipes() {
 
             </button>
             <button
-              className='share-done'
+              className="share-done"
               type="button"
               onClick={ () => copyToClipboard(recipe.type, recipe.id) }
             >
@@ -133,21 +141,29 @@ function FavoriteRecipes() {
           </div>
         )
           : (
-            <div className='container-done' key={ recipe.name }>
+            <div className="container-done" key={ recipe.name }>
               <Link to={ `/${recipe.type}s/${recipe.id}` }>
                 <img
                   src={ recipe.image }
-                  className='img-done'
+                  className="img-done"
                   alt="meal img"
                   data-testid={ `${index}-horizontal-image` }
                 />
               </Link>
-              <div className='done-details'>
-                <Link style={{ textDecoration: 'none' }} to={ `${recipe.type}s/${recipe.id}` }>
-                  <p className='title-done-details' data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+              <div className="done-details">
+                <Link
+                  style={ { textDecoration: 'none' } }
+                  to={ `${recipe.type}s/${recipe.id}` }
+                >
+                  <p
+                    className="title-done-details"
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    {recipe.name}
+                  </p>
                 </Link>
                 <span
-                  className='details-done'
+                  className="details-done"
                   data-testid={ `${index}-horizontal-top-text` }
                 >
                   {recipe.nationality}
@@ -158,7 +174,7 @@ function FavoriteRecipes() {
                 </span>
               </div>
               <button
-                className='share-done'
+                className="share-done"
                 type="button"
                 onClick={ () => removeFavorite(recipe.id) }
               >
@@ -170,7 +186,7 @@ function FavoriteRecipes() {
 
               </button>
               <button
-                className='share-done'
+                className="share-done"
                 type="button"
                 onClick={ () => copyToClipboard(recipe.type, recipe.id) }
               >

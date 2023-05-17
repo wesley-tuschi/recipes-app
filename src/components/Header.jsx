@@ -20,9 +20,12 @@ function Header() {
 
     if (pagesWithSearch.includes(location.pathname)) {
       return (
-        <button className='search-top' onClick={ () => setIsSearchVisible(!isSearchVisible) }>
+        <button
+          className="search-top"
+          onClick={ () => setIsSearchVisible(!isSearchVisible) }
+        >
           <img
-            className='search-top-btn'
+            className="search-top-btn"
             src={ searchIcon }
             alt="Search Icon"
             data-testid="search-top-btn"
@@ -89,9 +92,9 @@ function Header() {
         />
       </div>
       <div className="profile-search-icons">
-        <button className='profile-top' onClick={ () => history.push('/profile') }>
+        <button className="profile-top" onClick={ () => history.push('/profile') }>
           <img
-            className='profile-top-btn'
+            className="profile-top-btn"
             src={ profileIcon }
             alt="Profile Icon"
             data-testid="profile-top-btn"
