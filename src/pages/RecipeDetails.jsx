@@ -120,6 +120,7 @@ function RecipesDetails() {
               onClick={ copyToClipboard }
               data-testid="share-btn"
             >
+              {/* eslint-disable-next-line */}
               <img
                 src={ shareIcon }
                 alt="share button"
@@ -130,6 +131,7 @@ function RecipesDetails() {
               className="btn-fav"
               onClick={ () => saveFavorite() }
             >
+              {/* eslint-disable-next-line */}
               <img
                 className="btn-favorite"
                 data-testid="favorite-btn"

@@ -163,6 +163,7 @@ function RecipeInProgress() {
                   data-testid="share-btn"
                   onClick={ copyToClipboard }
                 >
+                  {/* eslint-disable-next-line */}
                   <img
                     className="shareIcon-progress"
                     src={ shareIcon }
@@ -175,12 +176,14 @@ function RecipeInProgress() {
                   type="button"
                   onClick={ () => saveFavorite() }
                 >
+                  {/* eslint-disable-next-line */}
                   <img
                     className="btn-favorite"
                     src={ !isFavorite ? whiteHeartIcon : blackHeartIcon }
                     data-testid="favorite-btn"
                     alt=" favorite button"
                   />
+
                 </button>
               </div>
             </div>
