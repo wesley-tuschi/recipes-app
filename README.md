@@ -1,5 +1,7 @@
 # 🍽️ Recipes APP
-Link: https://recipes-app-two-silk.vercel.app/
+![Screenshot](Screenshot.png)
+
+## Link: https://recipes-app-two-silk.vercel.app/
 
 ## 📖 Sobre
 Este aplicativo culmina o final da nossa sessão de Front-End na Trybe. O objetivo é auxiliar todos aqueles que amam cozinhar, mas às vezes ficam perdidos sobre como preparar seus pratos favoritos.
